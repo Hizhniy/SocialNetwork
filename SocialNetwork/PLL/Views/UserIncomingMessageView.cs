@@ -15,7 +15,7 @@ namespace SocialNetwork.PLL.Views
 
             if (incomingMessages.Count() == 0)
             {
-                Console.WriteLine("Входящих сообщения нет");
+                Console.WriteLine("Входящих сообщений нет");
                 return;
             }
 

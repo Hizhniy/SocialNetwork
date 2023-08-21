@@ -1,22 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit3TestAdapter.4.5.0\build\net462\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.4.5.0\build\net462\NUnit3TestAdapter.props')" />
+  <Import Project="..\packages\NUnit.3.13.3\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.13.3\build\NUnit.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9D9AE8BB-664C-432F-93DB-9FB4982C0465}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>SocialNetwork</RootNamespace>
-    <AssemblyName>SocialNetwork</AssemblyName>
+    <ProjectGuid>{F3FDFDDE-3000-413A-941B-2D0A418BE37C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SocialNetwork.Tests</RootNamespace>
+    <AssemblyName>SocialNetwork.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,7 +27,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -38,8 +38,10 @@
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.2.0.151\lib\net461\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework, Version=3.13.3.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.13.3\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\lib\net46\System.Data.SQLite.dll</HintPath>
@@ -52,53 +54,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\Exceptions\FriendAlreadyExistsException.cs" />
-    <Compile Include="BLL\Exceptions\UserNotFoundException.cs" />
-    <Compile Include="BLL\Exceptions\WrongPasswordException.cs" />
-    <Compile Include="BLL\Models\Friend.cs" />
-    <Compile Include="BLL\Models\FriendManageData.cs" />
-    <Compile Include="BLL\Models\Message.cs" />
-    <Compile Include="BLL\Models\MessageSendingData.cs" />
-    <Compile Include="BLL\Models\User.cs" />
-    <Compile Include="BLL\Models\UserAuthenticationData.cs" />
-    <Compile Include="BLL\Models\UserRegistrationData.cs" />
-    <Compile Include="BLL\Services\FriendService.cs" />
-    <Compile Include="BLL\Services\MessageService.cs" />
-    <Compile Include="BLL\Services\UserService.cs" />
-    <Compile Include="DAL\Entities\FriendEntity.cs" />
-    <Compile Include="DAL\Entities\MessageEntity.cs" />
-    <Compile Include="DAL\Entities\UserEntity.cs" />
-    <Compile Include="DAL\Repositories\BaseRepository.cs" />
-    <Compile Include="DAL\Repositories\FriendRepository.cs" />
-    <Compile Include="DAL\Repositories\MessageRepository.cs" />
-    <Compile Include="DAL\Repositories\UserRepository.cs" />
-    <Compile Include="PLL\Helpers\AlertMessage.cs" />
-    <Compile Include="PLL\Helpers\SuccessMessage.cs" />
-    <Compile Include="PLL\Views\AuthenticationView.cs" />
-    <Compile Include="PLL\Views\FriendCreateView.cs" />
-    <Compile Include="PLL\Views\MainView.cs" />
-    <Compile Include="PLL\Views\MessageSendingView.cs" />
-    <Compile Include="PLL\Views\RegistrationView.cs" />
-    <Compile Include="PLL\Views\UserDataUpdateView.cs" />
-    <Compile Include="PLL\Views\UserIncomingMessageView.cs" />
-    <Compile Include="PLL\Views\UserInfoView.cs" />
-    <Compile Include="PLL\Views\UserMenuView.cs" />
-    <Compile Include="PLL\Views\UserOutcomingMessageView.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="FriendServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="DAL\DB\social_network_bd.db" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SocialNetwork\SocialNetwork.csproj">
+      <Project>{9d9ae8bb-664c-432f-93db-9fb4982c0465}</Project>
+      <Name>SocialNetwork</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NUnit.3.13.3\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.13.3\build\NUnit.props'))" />
+    <Error Condition="!Exists('..\packages\NUnit3TestAdapter.4.5.0\build\net462\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.4.5.0\build\net462\NUnit3TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
 </Project>
